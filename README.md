@@ -1,4 +1,4 @@
-# Project 2:Ames Housing Data & Kaggle Challenge
+# Project 2:Ames Housing Data Analysis
 
 ## Executive Summary
 
