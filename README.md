@@ -1,4 +1,4 @@
-# Project 2:Ames Housing Data Analysis
+# Ames Housing Data Analysis
 
 ## Executive Summary
 
@@ -68,19 +68,19 @@ Lesson 3.02 - Regression Metrics
 
 ![Model 1 Test!](./images/1st_model_test.png "Model 1 Test")
 
-From the cross validation before fitting the model we established a baseline R2 score of 81.71% and 67.59%. There is a drop in the test set score as it does not do as good of a job generalizing to new data. Indicating that the model is overfit and has high variance as its baseline.  When we actually run the model we get scores of 86.28% and 73.46%.  While both scores see an increase the model is still overfit and regularization could help decrease the variance.
+From the cross validation before fitting the model we established a baseline R2 score of 80.27% and 65.59%. There is a drop in the test set score as it does not do as good of a job generalizing to new data. Indicating that the model is overfit and has high variance as its baseline.  When we actually run the model we get scores of 85.28% and 71.53%.  While both scores see an increase the model is still overfit and regularization could help decrease the variance.
 
 ### Model 2
 
 ![Model 2 Train!](./images/2nd_model_train.png "Model 2 Train")
 ![Model 2 Test!](./images/2nd_model_test.png "Model 2 Test")
 
-Using Ridge we see a minimal difference between the original and the ridge version. Just that the training and test scores are a bit closer together. Original scores were 86.28%(training) and 73.46%(testing) compared to ridge scores of 85.80%(training) and 76.02%(testing).  We can see Ridge had a slightly worse performance with testing and slightly better with training, which also lowered the variance and made it slightly less overfit. It is also worth noting that this was also preprocessed via Standard Scaler, in order to account for the dimensionality differences within these features(such as square footage).Scaling is required so that regularization penalizes each variable equally fairly. This indicates a need for features that are more signal than noise, in order to strengthen the model's overall performance, increasing feature engineering that is guided by the research can help with this.
+Using Ridge we see a minimal difference between the original and the ridge version. Just that the training and test scores are a bit closer together. Original scores were 85.28%(training) and 71.53%(testing) compared to ridge scores of 84.77%(training) and 73.29%(testing).  We can see Ridge had a slightly worse performance with testing and slightly better with training, which also lowered the variance and made it slightly less overfit. It is also worth noting that this was also preprocessed via Standard Scaler, in order to account for the dimensionality differences within these features(such as square footage).Scaling is required so that regularization penalizes each variable equally fairly. This indicates a need for features that are more signal than noise, in order to strengthen the model's overall performance, increasing feature engineering that is guided by the research can help with this.
 
 ### Model 3
 ![Model 3 Test!](./images/3rd_model_train.png "Model 3 Test")
 
-This model is doing worse than the first model when it comes to generalizing to new data. While the R2 scoring was high on the training data set 94%. R2 can have a negative value when the model is so bad at following the trend of the data that it does worse to fit it than a horizontal line or just picking something at random. The R2 for the test data was -42%.  It looks like executing the polynomial features on all the existing features did not do the trick, and its back to the drawing board. The next model will also make use of standard scaler since the different dimensions that all these features use could have become way too different in magnitude.
+This model is doing worse than the first model when it comes to generalizing to new data. While the R2 scoring was high on the training data set 94%. R2 can have a negative value when the model is so bad at following the trend of the data that it does worse to fit it than a horizontal line or just picking something at random. The R2 for the test data was --.79%.  It looks like executing the polynomial features on all the existing features did not do the trick, and its back to the drawing board. The next model will also make use of standard scaler since the different dimensions that all these features use could have become way too different in magnitude.
 
 [Reference Here](https://medium.com/analytics-vidhya/is-it-possible-to-have-a-negative-r-square-847a6a4a2fbe)
 
@@ -88,24 +88,25 @@ This model is doing worse than the first model when it comes to generalizing to 
 ![Model 4 Train!](./images/4th_model_train.png "Model 4 Train")
 ![Model 4 Test!](./images/4th_model_test.png "Model 4 Test")
 
-The previous model was horrible, but by using standard scaler it must have controlled for all the differences in magnitude whether its square footage vs age of the home. Properly scaling the numbers made R2 jump to 88.24% on the training set and 80.64% on the test sit and it outperforms model 1. On the other hand this model is overfit, and will need to use regularization in order to decrease the variance and hopefully get a properly fit model.
+The previous model was horrible, but by using standard scaler it must have controlled for all the differences in magnitude whether its square footage vs age of the home. Properly scaling the numbers made R2 jump to 87.66% on the training set and 74.39% on the test sit and it outperforms model 1. On the other hand this model is overfit, and will need to use regularization in order to decrease the variance and hopefully get a properly fit model.
 
 ### Model 5
 ![Model 5 Train!](./images/5th_model_train.png "Model 5 Train")
 ![Model 5 Test!](./images/5th_model_test.png "Model 5 Test")
 
-When applying the Lasso regularization there was a minuscule improvement on the training data from 88.244810 to 88.244815.  And a bit of an improvement with the testing data from 80.642 to 80.648 which slightly reduces the variance but still leads to an overfit model that does not generalize to new data as well as it does to the training data indicating that its still modeling too much noise in the data.
+When applying the Lasso regularization there is no improvement on the training data or testing data.
+
 ### Model 6
 ![Model 6 Train!](./images/6th_model_train.png "Model 6 Train")
 ![Model 6 Test!](./images/6th_model_test.png "Model 6 Test")
 
-This model also deviates from model 4 and when applying the Ridge regression with an optimal alpha, we get a training R2 of 86.30% while the testing R2 is 82.54%.  When we compare it to the Lasso regression model we have a slight decline in improvement from 88.24% to 86.30%, but we have an improvement with the testing as it increases from 80.64% to 82.54%.  This model generalizes slightly better to newer data and has decreased its variance but is still modeling to some of the noise in the data.  While the model is still overfit we are trending in the right direction. If we are to improve the balance of the bias-variance we may have to couple regularization with decreasing complexity of the model.  If we go back to our original baseline model that scored 67.59% for testing data, this latest iteration of the model has increased by about 15 points in accuracy.
+This model also deviates from model 4 and when applying the Ridge regression with an optimal alpha, we get a training R2 of 87.49% while the testing R2 is 75.02%.  When we compare it to the Lasso regression model we have a slight decline in improvement from 87.66% to 86.50%, but we have an improvement with the testing as it increases from 74.39% to 75.02%.  This model generalizes slightly better to newer data and has decreased its variance but is still modeling to some of the noise in the data.  While the model is still overfit we are trending in the right direction. If we are to improve the balance of the bias-variance we may have to couple regularization with decreasing complexity of the model.  If we go back to our original baseline model that scored 65.59% for testing data, this latest iteration of the model has increased by about 15 points in accuracy.
 
 ### Model 7
 ![Model 7 Train!](./images/7th_model_train.png "Model 7 Train")
 ![Model 7 Test!](./images/7th_model_test.png "Model 7 Test")
 
-Decided to be more selective with the features, and dropped those with extremely low correlations. Once that happened then I applied the polynomial features to it. This has lead to a somewhat slightly underfit model that scores less on training data at 84.17% but scored the highest yet on the testing data with a score of 84.44%.  This model seems to have a bit more bias than any of my previous models, thus it is underfit, and therefore does not need regularization. Also, a model that has been subjected to Standard Scaler. This model does the best job in finding that optimal sweet spot where we are balancing the bias and variance in order to minimize error.
+Decided to be more selective with the features, and dropped those with extremely low correlations. Once that happened then I applied the polynomial features to it. This has lead to a somewhat slightly underfit model that scores less on training data at 83.08% but scored the highest yet on the testing data with a score of 83.41%.  This model seems to have a bit more bias than any of my previous models, thus it is underfit, and therefore does not need regularization. Also, a model that has been subjected to Standard Scaler. This model does the best job in finding that optimal sweet spot where we are balancing the bias and variance in order to minimize error.
 Reference:lesson Bias-Variance
 
 ## Conclusions & Recommendations.
