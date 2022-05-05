@@ -35,10 +35,6 @@ Looks like most values in the data set are between 120,000 to a little under 280
 <br>
 This is a slightly higher than moderate linear relationship, it takes on the shape of a fan. Its correlation is .71.
 
-![Overall Quality Vs. Sales Price!](./images/overall_qual_vs_sales.png "Overall Quality Vs. Sales Price")
-<br>
-For categorical features such as overall quality, the logarithmic base can bend the scale such that we can see a relationship between overall quality and sale price.  This actually has a higher correlation than the previous example at .79.
-
 ![!](./images/bmt_fn_sf2_vs_sales.png)
 
 A feature with low correlations, this one is -0.002936.
