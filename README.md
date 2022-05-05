@@ -1,10 +1,10 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)Project 2:Ames Housing Data & Kaggle Challenge
+# Project 2:Ames Housing Data & Kaggle Challenge
 
 ## Executive Summary
 
 ## Problem statement
 
-Are inaccurate sales prices leading to unfair outcomes for homeowners looking to sell? This impacts homeowners pricing their homes too high, which makes their homes unsellable even in the best of markets. If we can predict a price for a home with the optimal linear regression model that outperforms a baseline model could we end up aiding homeowners in this situation. As a data scientist working for a real estate company, eliminating this pain point would also help real estate agents close more deal, get more commission, and more revenue from closing fees.
+As a data scientist working for an up and coming real estate app, how can we optimize predicting pricing outcomes for homeowners looking to sell? Whether it’s the homeowner pricing too high, leading their homes unsellable even in good markets or homeowners not maximizing the profits by listing the prices too low. We can optimize the predictions through feature engineering and linear regression so that we can have an R2 score that exceeds a baseline model. We can also gain insights how these features contribute to pricing as well.
 
 ### Description of Dataset
 The two datasets used for this project are a test and train component of the Ames housing dataset, which was obtained via project lesson plan from the course.
@@ -110,8 +110,18 @@ Reference:lesson Bias-Variance
 
 ## Conclusions & Recommendations.
 
-The initial premise here was to predict a price for a home using a linear regression model that outperforms a baseline model.  After iterating through several models, I selected a Linear Regression model that whittled down features based on very poor correlation.  From there the polynomial features transformation and the standard scaler were applied.  This ended up having the best R2 Score for testing portion of the train-test-split.  It had an R2 score of 84.44% which was an improvement over the baseline of the original model many iterations ago, that baseline had a score of 67.59%.  There was a 17 point improvement in score.  In other words there was a 67.59% of the variance in our sales price  that could be explained by the features in our model to begin with, and that has improved to 84.44% of the variance/variability in our sales price that could be explained by the features in our model. Also worth noting that the RMSE of this model was 31298.11 which is a decrease from the first mode RMSE of 42229.12. This can be good because you want RMSE as close to 0 as possible and is in the dollar units of salesprice so in a sense the predicted y is closer to actual y. This is something that could help benefit homeowners and the real estate agents that work with them as far as being able to know what an adequate price is that would enable them to sell the home.  As we know from the research portion of this being overpriced will not allow for you to sell the home and underpricing it really harms the homeowner. Future steps to move the project forward would involve even more research that could help feature engineer even more useful x variables that could contribute to the model.
+The initial premise here was to predict a price for a home using a linear regression model that outperforms a baseline model.  After iterating through several models, I selected a Linear Regression model that whittled down features based on very poor correlation.  From there the polynomial features transformation and the standard scaler were applied.  This ended up having the best R2 Score for testing portion of the train-test-split.  It had an R2 score of 83.41% which was an improvement over the baseline of the original model many iterations ago, that baseline had a score of 65.59%.  Thats a shade under an 18 points of improvement in the R2 score.  In other words there was a 65.59% of the variance in our sales price  that could be explained by the features in our model to begin with, and that has improved to 83.41% of the variance/variability in our sales price that could be explained by the features in our model. Also worth noting that the testing RMSE of this model was 32307.37 which is a decrease from the first model RMSE of 43739.88. This can be good because you want RMSE as close to 0 as possible and is in the dollar units of salesprice so in a sense the predicted y is closer to actual y. This is something that could help benefit homeowners and the real estate agents that work with them as far as being able to know what an adequate price is that would enable them to sell the home.  As we know from the research portion of this being overpriced will not allow for you to sell the home and underpricing it really harms the homeowner. Future steps to move the project forward would involve even more research that could help feature engineer even more useful x variables that could contribute to the model. Regularization really helped decrease the variance between the training and testing R2 scores as well, and actually lead to improvements in the lowest RMSE as well.
+
+| **Model** | **Train RMSE** | **Test RMSE** | **Train R2** | **Test R2** |
+|-----------|----------------|---------------|--------------|-------------|
+| Model_1   | 29587.55       | 43739.88      |      .85     |     .72     |
+| Model_2   | 30098.74       | 42362.35      |      .85     |     .73     |
+| Model_3   | 18850.60       | 109767.34     |      .94     |     -.79    |
+| Model_4   | 27087.66       | 41485.18      |      .88     |     .74     |
+| Model_5   | 27087.68       | 41483.23      |      .88     |     .74     |
+| Model_6   | 27270.32       | 40967.73      |      .87     |     .74     |
+| Model_7   | 31694.52       | 32307.37      |      .83     |     .83     |
 ## Next steps
 
 Future steps to move the project forward would involve even more research that could help feature engineer even more useful x variables that could contribute to the model.
-# standardized-test-analysis
+# housing_data_analysis
