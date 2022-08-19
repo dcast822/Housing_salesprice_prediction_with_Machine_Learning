@@ -1,10 +1,10 @@
-# Ames Housing Data Analysis
+# Salesprice Prediction with Machine Learning
 
 ## Executive Summary
 
 ## Problem statement
 
-As a data scientist working for an up and coming real estate app, how can we optimize predicting pricing outcomes for homeowners looking to sell? Whether it’s the homeowner pricing too high, leading their homes unsellable even in good markets or homeowners not maximizing the profits by listing the prices too low. We can optimize the predictions through feature engineering and linear regression so that we can have an R2 score that exceeds a baseline model. We can also gain insights how these features contribute to pricing as well.
+As a data scientist working for real estate company, how can we optimize predicting pricing outcomes for homeowners looking to sell? Whether it’s the homeowner pricing too high, leading their homes unsellable even in good markets or homeowners not maximizing the profits by listing the prices too low. We can optimize the predictions through feature engineering and linear regression so that we can have an R2 score that exceeds a baseline model. We can also gain insights how these features contribute to pricing as well.
 
 ### Description of Dataset
 The two datasets used for this project are a test and train component of the Ames housing dataset, which was obtained via project lesson plan from the course.
@@ -14,37 +14,47 @@ The two datasets used for this project are a test and train component of the Ame
 Data Dictionary can be found *[Here!](http://jse.amstat.org/v19n3/decock/DataDocumentation.txt)*.
 
 ## Data Visualizations & Analysis
+
 ### Highest Correlated features
 
-![Correlations sorted by Sales price!](./images/heat_map.png "Correlations sorted by Sales price")
-<br>
-This heat map gives us a good look at the features with the highest correlation. Such as 'Overall Quality'.81, 'Above grade (ground) living area square feet' at .71.  Some of the features with no effect whatsoever are '3 season porch area(sq. ft)' at .037 and the month sold at .026.
+![Correlations sorted by Sales price!](./images/new_trainheatmap.png "Correlations sorted by Sales price")
 
+This heat map gives us a good look at the features with the highest correlation. Such as 'Overall Quality' being .79, 'Above grade (ground) living area square feet' at .67.  
+Others worth noting are:
+
+* Total Square footage: .8
+* High Quality: .68
+* Massive Square Footage: .65
+* Garage Cars: .62
+* Year Built: .62
+<br>
 
 ### Exploring some relationships with the highest correlated features
+<br>
 
 ![Overall Quality Value Counts!](./images/overall_quality_value_cts.png "Overall Quality Value Counts")
-<br>
 This is a feature with a high correlation of .79. We can see most of the houses are between a quality rating of 5 and 8.  Data engineered from this feature to create a binary high quality column where we have the quality be at least an 8.
+<br>
 
 ![Distribution of Sales Price!](./images/salesprice_distr.png "Distribution of Sales Price")
-<br>
 Looks like most values in the data set are between 120,000 to a little under 280,000.  This is also a right-skewed distribution as the long tail extends to the right as most values are show on the left side(between 90,000 & 340,000). You can also see a value of 600,000 as an outlier as well.
-
-![Above Grade Ground Living Area!](./images/gr_liv_area_vs_sales.png "Above Grade Ground Living Area")
 <br>
-This is a slightly higher than moderate linear relationship, it takes on the shape of a fan. Its correlation is .71.
-
-![!](./images/bmt_fn_sf2_vs_sales.png)
-
-A feature with low correlations, this one is -0.002936.
-![!](./images/misc_ft_vs_sales.png)
-
-This one has a correlation of -0.007502
-
-![Age of home vs. Sales Price!](./images/age_home_salesprice.png)
+![Above Grade Ground Living Area!](./images/grliv_area_vs_sales2.png "Above Grade Ground Living Area")
+This is a slightly higher than moderate linear relationship, it takes on the shape of a fan. Its correlation is .67.
 <br>
+![Age of home vs. Sales Price!](./images/age_home_salesprice.png "Age of home & Salesprice")
 Age of home is a feature that was engineered with a negative correlation, which dictates that the "younger" the home the more the sales price is.
+<br>
+
+![Houses built by Year](./images/Houses_built_by_year2.png "Value counts of houses built by Year")
+
+![Total Square Footage & Salesprice](./images/totalsfvs_salesprice.png "Total Square Foootage & Salesprice")
+A clear relationship that tells us that  greater square footage leads to higher salesprices for homes.
+<br>
+
+![Value Counts for Quantity of Cars in Garage](./images/valuecounts_cars_garage.png "Value Count for Quantity of Cars in Garage")
+Shows us that most garages can fit at least 2 cars.
+<br>
 
 ## Finding the right model
 
@@ -105,9 +115,9 @@ This model also deviates from model 4 and when applying the Ridge regression wit
 Decided to be more selective with the features, and dropped those with extremely low correlations. Once that happened then I applied the polynomial features to it. This has lead to a somewhat slightly underfit model that scores less on training data at 83.08% but scored the highest yet on the testing data with a score of 83.41%.  This model seems to have a bit more bias than any of my previous models, thus it is underfit, and therefore does not need regularization. Also, a model that has been subjected to Standard Scaler. This model does the best job in finding that optimal sweet spot where we are balancing the bias and variance in order to minimize error.
 Reference:lesson Bias-Variance
 
-## Conclusions & Recommendations.
+## Up to this point
 
-The initial premise here was to predict a price for a home using a linear regression model that outperforms a baseline model.  After iterating through several models, I selected a Linear Regression model that whittled down features based on very poor correlation.  From there the polynomial features transformation and the standard scaler were applied.  This ended up having the best R2 Score for testing portion of the train-test-split.  It had an R2 score of 83.41% which was an improvement over the baseline of the original model many iterations ago, that baseline had a score of 65.59%.  Thats a shade under an 18 points of improvement in the R2 score.  In other words there was a 65.59% of the variance in our sales price  that could be explained by the features in our model to begin with, and that has improved to 83.41% of the variance/variability in our sales price that could be explained by the features in our model. Also worth noting that the testing RMSE of this model was 32307.37 which is a decrease from the first model RMSE of 43739.88. This can be good because you want RMSE as close to 0 as possible and is in the dollar units of salesprice so in a sense the predicted y is closer to actual y. This is something that could help benefit homeowners and the real estate agents that work with them as far as being able to know what an adequate price is that would enable them to sell the home.  As we know from the research portion of this being overpriced will not allow for you to sell the home and underpricing it really harms the homeowner. Future steps to move the project forward would involve even more research that could help feature engineer even more useful x variables that could contribute to the model. Regularization really helped decrease the variance between the training and testing R2 scores as well, and actually lead to improvements in the lowest RMSE as well.
+The initial premise here was to predict a price for a home using a linear regression model that outperforms a baseline model.  After iterating through several models, I selected a Linear Regression model that whittled down features based on very poor correlation.  The following step was to apply both a polynomial features transformation and the standard scaler.  This ended up having the best R2 Score for testing portion of the train-test-split.  It had an R2 score of 83.41% which was an improvement over the baseline of the original model many iterations ago, that baseline had a score of 65.59%.  Thats a shade under an 18 points of improvement in the R2 score.  In other words there was a 65.59% of the variance in our sales price  that could be explained by the features in our model to begin with, and that has improved to 83.41% of the variance/variability in our sales price that could be explained by the features in our model. Also worth noting that the testing RMSE of this model was 32307.37 which is a decrease from the first model RMSE of 43739.88. This can be good because you want RMSE as close to 0 as possible and is in the dollar units of salesprice so in a sense the predicted y is closer to actual y.
 
 | **Model** | **Train RMSE** | **Test RMSE** | **Train R2** | **Test R2** |
 |-----------|----------------|---------------|--------------|-------------|
@@ -118,7 +128,94 @@ The initial premise here was to predict a price for a home using a linear regres
 | Model_5   | 27087.68       | 41483.23      |      .88     |     .74     |
 | Model_6   | 27270.32       | 40967.73      |      .87     |     .74     |
 | Model_7   | 31694.52       | 32307.37      |      .83     |     .83     |
-## Next steps
 
-Future steps to move the project forward would involve even more research that could help feature engineer even more useful x variables that could contribute to the model.
+## Revisiting & Retooling
+The purpose of revisiting this project via models 8-15 is to show more thoughtfulness in a few areas to see how that impacts our linear regression models:
+* Dealing with outliers
+* Dealing with Nulls
+* Processing the data
+* Feature Selection
+* Having a DRY approach
+
+### Dealing with Nulls
+During the first two notebooks my approach entailed simply dropping nulls, for columns with close to or over 50% nulls I would just drop the column.  Remaining columns with a null presence of about 5% had those rows simply dropped.  This time around I had the same approach where I dropped those columns that had about 50% nulls or higher, but the remaining null values were dealt with differently.  For numerical columns I decided to go with the experimental iterative imputer, and for any other data type went with a simple imputer approach(most frequent).  This allowed for me to have more fleshed out data points, and wanted to see how these changes would impact the model.
+
+### Dealing with Nulls
+During the first two notebooks my approach entailed simply dropping nulls, for columns with close to or over 50% nulls I would just drop the column.  Remaining columns with a null presence of about 5% had those rows simply dropped.  This time around I had the same approach where I dropped those columns that had about 50% nulls or higher, but the remaining null values were dealt with differently.  For numerical columns I decided to go with the experimental iterative imputer, and for any other data type went with a simple imputer approach(most frequent).  This allowed for me to have more fleshed out data points, and wanted to see how these changes would impact the model.
+
+### Processing the Data
+When processing the data I wanted to really familiarize myself with the features, and noticed how I had not taken into account all the ordinal feature columns.  I decided to transform these columns using ordinal encoding.
+While maintaining the variables(paved drive & central air) I had made into binary propositions from my original project work. Then applied "get dummies" to the remaining categorical features that were of the nominal variety.
+Also I feature engineered by choosing columns with a high correlation and creating a new column to see whether the value was greater than or equal to the 75th percentile or not.  
+
+### DRY Approach
+Another thing I wanted to optimize was the actual workflow and using functions and list comprehensions in order to accomplish repetitive tasks such as when executing my imputing approach, in implementing/fitting a model and running metrics for that model.
+
+### Model 8
+![](./images/8th_model_train.png)
+
+![](./images/8th_model_test.png)
+
+### Model 9
+![](./images/9th_model_train.png)
+
+![](./images/9th_model_test.png)
+
+### Model 10
+![](./images/10th_model_train.png)
+
+![](./images/10th_model_test.png)
+
+### Model 11
+![](./images/11th_model_train.png)
+
+![](./images/11th_model_test.png)
+
+### Model 12
+![](./images/12th_model_train.png)
+
+![](./images/12th_model_test.png)
+
+### Model 13
+![](./images/13th_model_train.png)
+
+![](./images/13th_model_test.png)
+
+### Model 14
+![](./images/14th_model_train.png)
+
+![](./images/14th_model_test.png)
+
+### Model 15
+![](./images/15th_model_train.png)
+
+![](./images/15th_model_test.png)
+
+## Model Metrics(8-15)
+|              **Model**             | **Train MSE** | **Test MSE** | **Train RMSE** | **Test RMSE** | **Train R2** | **Test R2** | **Adjusted R2** |
+|:----------------------------------:|:-------------:|:------------:|:--------------:|:-------------:|:------------:|:-----------:|:---------------:|
+|   Base_line Cross validation mean  |       NA      |      NA      |       NA       |       NA      |      .80     |     .65     |                 |
+|  Model_8 Correlated features > .3  |  454556326.22 | 426113318.24 |    21320.33    |    20642.51   |      .87     |     .87     |       .92       |
+|  Model_9 Correlated features > .25 |  408688775.06 | 397568963.95 |    20216.05    |    19939.13   |      .88     |     .88     |       .92       |
+| Model_10 Correlated features > .20 |  385480212.23 | 395821216.32 |    19633.65    |    19895.26   |      .89     |     .88     |       .92       |
+| Model_11 Correlated features > .15 |  375816013.37 | 368520569.34 |    19385.97    |    19196.89   |      .89     |     .89     |       .92       |
+| Model_12 Correlated features > .10 |  349035246.53 | 337097661.46 |    18682.49    |    18360.22   |      .9      |      .9     |       .92       |
+| Model_13 Correlated features > .05 |  321993966.47 | 338455267.02 |    17944.19    |    18397.15   |      .9      |      .9     |       .92       |
+|  Model_14 Correlated features >-10 |  279402217.91 |**323432630.71**|  16715.33    |  **17984.23** |      .92     |    **.9**   |       .92       |
+|  Model_15 Correlated features >-25 |  247087410.31 | 325002715.87 |    15719.01    |    18027.83   |      .93     |      .9     |       .92       |
+
+
+
+
+## Conclusion
+Initially the results from model 8 which only included features with a correlation of over .3, surpassed anything I did in the first 7 models.  Some key take aways were an improvement to 87% for the testing R2 Score, and being able to halve my testing RMSE from model 1(43,739.88 to 20,642.51).  An additional metric I wanted to evaluate with was the adjusted R2, this is because the fact that the Adjust R2 value was higher than my testing R2 indicated that my models would work well by adding additional features.  This dictated the rest of my approach which peaks with model 14 which not only achieves the highest testing R2 score of .9 but also has the lowest RMSE of 17,984.23. Due to the differences in dealing with nulls, actually dealing with outliers, and processing the data allowed for my features to become more useful in building a model.  There was no need to use polynomial features and because my models were at a good bias variance level, there was no need for regularization either.  When you take into account the initial approach and having a baseline from the cross validation mean for testing at .65, being able to improve the model by 25 points to .9 is substantial.  Also when comparing it to the best performing model(model 7) from the first batch which had a testing R2 score of .83 there is also a 7 point improvement in performance with this latest iteration.  
+Key insights from the top ten coefficients for the best performing model were the following:
+* A house in the neigborhood of Greenhills with all else held constant gets an increase of 102,503.32 while one in Northride Heights gets an increase of 30,243.25, Northridge increases at 26,121, Veenker increases at 23,702.57.
+
+* Holding all else constant a house whose main exterior material is stone will have an increase in value of 26,330.17, while secondary materials of brick common will increase in value 18,002.22 and brick face 17,896.38.  
+* The ms_subclass 70 & 60 indicate 2 story homes that cover 1945 and before as well as 1946 and newer.  All else held constant ms_subclass 70 classified homes have an increase of 21992.12 while ms_subclass 60 have an increase of 20511.62(all else held constant).
+
+## Next steps
+After vastly improving the linear regression model, revisiting the project in the future will entail applying different types of models such as boosting models just to see if there is better performance.  The boosting model may not be as inferential but am curious to performance.
+​
 # housing_data_analysis
