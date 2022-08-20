@@ -152,44 +152,62 @@ Also I feature engineered by choosing columns with a high correlation and creati
 Another thing I wanted to optimize was the actual workflow and using functions and list comprehensions in order to accomplish repetitive tasks such as when executing my imputing approach, in implementing/fitting a model and running metrics for that model.
 
 ### Model 8
-![](./images/8th_model_train.png)
+![Mk 8 Train](./images/8th_model_train.png "MK 8 Train")
 
-![](./images/8th_model_test.png)
-
+![Mk 8 Test](./images/8th_model_test.png "MK 8 Test")
+This model already works better than any of the initial sets of models I worked on a couple of months back.  Worth noting this model only includes features that correlate with 'salesprice' at greater than or equal to .30.  I can attribute the improvement of just this baseline model to three factors. The way I dealt with null values was to use a combination of iterative imputation & simple imputation.  Dealing with outliers on my target feature by using a formal statistical method(interquartile range method). Another difference is in how I approached ordinal columns, where the values actually had a certain weight difference to them(e.g. excellent, good, bad), where I used an ordinal encoder to transform these columns.  If you compare the original results I used for my baseline model long ago where the Testing R2 Score is .65, this model has a whopping 22 point improvement with an R2 Score of .87.  It also has half RMSE value that our model 7 had, model 8 has an RMSE of 20642.51. The adjusted R2 of .92 also lets me know that the model can afford to add more features which determines how I iterate from here.
+<br>
 ### Model 9
-![](./images/9th_model_train.png)
+![MK 9 Train](./images/9th_model_train.png "MK 9 Train")
 
-![](./images/9th_model_test.png)
-
+![MK 9 Test](./images/9th_model_test.png "MK 9 Test")
+This model takes into account that the previous model had a higher Adjusted R2 than R2, indicating we can add more features.  This model includes correlating features that are greater than .25.  Testing R2 Jumps up to .88 and the RMSE goes down to 19939.13.  Adjusted R2 will maintain itself at .92 from hereon.  
+<br>
 ### Model 10
-![](./images/10th_model_train.png)
+![MK 10 Train](./images/10th_model_train.png "MK 10 Train")
 
-![](./images/10th_model_test.png)
-
+![MK 10 Test](./images/10th_model_test.png "MK 10 Test")
+When adding features with a correlation greater than .20, the model continues to improve from the standpoint of RMSE by lowering to 19895.26.  Testing R2 score stays consistent at .88.
+<br>
 ### Model 11
-![](./images/11th_model_train.png)
+![MK 11 Train](./images/11th_model_train.png "MK 11 Train")
 
-![](./images/11th_model_test.png)
-
+![MK 11 Test](./images/11th_model_test.png "MK 11 Test")
+When adding features with a correlation greater than .15, the model jumps in its Testing R2 score to .89 while lowering its Testing RMSE to 19196.89.
+<br>
 ### Model 12
-![](./images/12th_model_train.png)
+![MK 12 Train](./images/12th_model_train.png "MK 12 Train")
 
-![](./images/12th_model_test.png)
-
+![MK 12 Test](./images/12th_model_test.png "MK 12 Test")
+This model includes features with correlation greater than .10, this model improves with respect to its Testing R2: .9 and reduces its testing RMSE: 18360.22.
+<br>
 ### Model 13
-![](./images/13th_model_train.png)
+![MK 13 Train](./images/13th_model_train.png "MK 13 Train")
 
-![](./images/13th_model_test.png)
-
+![MK 13 Test](./images/13th_model_test.png "MK 13 Test")
+For the model that includes features with correlation greater than .05, Testing R2 remains the same and testing RMSE increases to 18397.15.
+<br>
 ### Model 14
-![](./images/14th_model_train.png)
+![MK 14 Train](./images/14th_model_train.png "MK 14 Train")
 
-![](./images/14th_model_test.png)
+![MK 14 Test](./images/14th_model_test.png "MK 14 Test")
+This turns out to be the best performing model because not only does it maintain the R2 score of .9, it has the lowest Testing RMSE at 17984.23.
+<br>
+### Model 14 Coefficients
+![Top ten coefficients](./images/top_ten_coef_feat.png "")
+Key insights from the top ten coefficients for the best performing model were the following:
+* A house in the neighborhood of Green Hills with all else held constant gets an increase of 102,503.32 while one in Northridge Heights gets an increase of 30,243.25, Northridge increases at 26,121, Veenker increases at 23,702.57.
+
+* Holding all else constant a house whose main exterior material is stone will have an increase in value of 26,330.17, while secondary materials of brick common will increase in value 18,002.22 and brick face 17,896.38.  
+* The ms_subclass 70 & 60 indicate 2 story homes that cover 1945 and before as well as 1946 and newer.  All else held constant ms_subclass 70 classified homes have an increase of 21992.12 while ms_subclass 60 have an increase of 20511.62(all else held constant).
+<br>
 
 ### Model 15
-![](./images/15th_model_train.png)
+![MK 15 Train](./images/15th_model_train.png "MK 15 Train")
 
-![](./images/15th_model_test.png)
+![MK 15 Test](./images/15th_model_test.png "MK 15 Test")
+This is the first of a couple of models I ran where the RMSE began to gradually increase.  Which was a good indication to have this become my stopping point.
+<br>
 
 ## Model Metrics(8-15)
 |              **Model**             | **Train MSE** | **Test MSE** | **Train RMSE** | **Test RMSE** | **Train R2** | **Test R2** | **Adjusted R2** |
@@ -205,17 +223,8 @@ Another thing I wanted to optimize was the actual workflow and using functions a
 |  Model_15 Correlated features >-25 |  247087410.31 | 325002715.87 |    15719.01    |    18027.83   |      .93     |      .9     |       .92       |
 
 
-
-
 ## Conclusion
-Initially the results from model 8 which only included features with a correlation of over .3, surpassed anything I did in the first 7 models.  Some key take aways were an improvement to 87% for the testing R2 Score, and being able to halve my testing RMSE from model 1(43,739.88 to 20,642.51).  An additional metric I wanted to evaluate with was the adjusted R2, this is because the fact that the Adjust R2 value was higher than my testing R2 indicated that my models would work well by adding additional features.  This dictated the rest of my approach which peaks with model 14 which not only achieves the highest testing R2 score of .9 but also has the lowest RMSE of 17,984.23. Due to the differences in dealing with nulls, actually dealing with outliers, and processing the data allowed for my features to become more useful in building a model.  There was no need to use polynomial features and because my models were at a good bias variance level, there was no need for regularization either.  When you take into account the initial approach and having a baseline from the cross validation mean for testing at .65, being able to improve the model by 25 points to .9 is substantial.  Also when comparing it to the best performing model(model 7) from the first batch which had a testing R2 score of .83 there is also a 7 point improvement in performance with this latest iteration.  
-Key insights from the top ten coefficients for the best performing model were the following:
-* A house in the neigborhood of Greenhills with all else held constant gets an increase of 102,503.32 while one in Northride Heights gets an increase of 30,243.25, Northridge increases at 26,121, Veenker increases at 23,702.57.
-
-* Holding all else constant a house whose main exterior material is stone will have an increase in value of 26,330.17, while secondary materials of brick common will increase in value 18,002.22 and brick face 17,896.38.  
-* The ms_subclass 70 & 60 indicate 2 story homes that cover 1945 and before as well as 1946 and newer.  All else held constant ms_subclass 70 classified homes have an increase of 21992.12 while ms_subclass 60 have an increase of 20511.62(all else held constant).
+Initially the results from model 8 which only included features with a correlation of over .3, surpassed anything I did in the first 7 models.  Some key take aways were an improvement to 87% for the testing R2 Score, and being able to halve my testing RMSE from model 1(43,739.88 to 20,642.51).  An additional metric I wanted to evaluate with was the adjusted R2, this is because the fact that the Adjust R2 value was higher than my testing R2 indicated that my models would work well by adding additional features.  This dictated the rest of my approach which peaks with model 14 which not only achieves the highest testing R2 score of .9 but also has the lowest RMSE of 17,984.23. Due to the differences in dealing with nulls, actually dealing with outliers, and processing the data allowed for my features to become more useful in building a model.  There was no need to use polynomial features and because my models were at a good bias variance level, there was no need for regularization either.  When you take into account the initial approach and having a baseline from the cross validation mean for testing at .65, being able to improve the model by 25 points to .9 is substantial.  Also when comparing it to the best performing model(model 7) from the first batch which had a testing R2 score of .83 there is also a 7 point improvement in performance with model 14 having a .9 for its testing R2 score.  
 
 ## Next steps
 After vastly improving the linear regression model, revisiting the project in the future will entail applying different types of models such as boosting models just to see if there is better performance.  The boosting model may not be as inferential but am curious to performance.
-​
-# housing_data_analysis
