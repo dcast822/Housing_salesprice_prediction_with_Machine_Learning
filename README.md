@@ -137,8 +137,8 @@ The purpose of revisiting this project via models 8-15 is to show more thoughtfu
 * Feature Selection
 * Having a DRY approach
 
-### Dealing with Nulls
-During the first two notebooks my approach entailed simply dropping nulls, for columns with close to or over 50% nulls I would just drop the column.  Remaining columns with a null presence of about 5% had those rows simply dropped.  This time around I had the same approach where I dropped those columns that had about 50% nulls or higher, but the remaining null values were dealt with differently.  For numerical columns I decided to go with the experimental iterative imputer, and for any other data type went with a simple imputer approach(most frequent).  This allowed for me to have more fleshed out data points, and wanted to see how these changes would impact the model.
+### Dealing with Outliers
+Used a statistical approach in dealing with outliers for the target variable Salesprice. Anything that is 1.5 greater than the Interquartile range and then adding or subtracting that amount from the 75th and 25th percentile would be considered the cut off points.  
 
 ### Dealing with Nulls
 During the first two notebooks my approach entailed simply dropping nulls, for columns with close to or over 50% nulls I would just drop the column.  Remaining columns with a null presence of about 5% had those rows simply dropped.  This time around I had the same approach where I dropped those columns that had about 50% nulls or higher, but the remaining null values were dealt with differently.  For numerical columns I decided to go with the experimental iterative imputer, and for any other data type went with a simple imputer approach(most frequent).  This allowed for me to have more fleshed out data points, and wanted to see how these changes would impact the model.
