@@ -17,7 +17,7 @@ Data Dictionary can be found *[Here!](http://jse.amstat.org/v19n3/decock/DataDoc
 
 ### Highest Correlated features
 
-![Correlations sorted by Sales price!](./images/new_trainheatmap.png "Correlations sorted by Sales price")
+![Correlations sorted by Salesprice!](./images/new_trainheatmap.png "Correlations Sorted by Salesprice")
 
 This heat map gives us a good look at the features with the highest correlation. Such as 'Overall Quality' being .79, 'Above grade (ground) living area square feet' at .67.  
 Others worth noting are:
